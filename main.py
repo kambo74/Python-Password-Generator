@@ -1,0 +1,33 @@
+letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+numbers = ['0','1','2','3','4','5','6','7','8','9']
+symbols = ['!','@','#','$','%','^','&','*','(',')']
+
+import random as rnd
+
+questions = ["length","letters","numbers","symbols"]
+value = [0,0,0,0]
+i = 0
+password = ""
+for question in questions:
+    if question == "length":
+        value[i] = int(input("What should be the length of the password? (should be more than 8): "))
+    else:
+        value[i] = int(input(f"How many {question} should be in password:"))
+    i += 1
+i = 1
+
+if value[0] == (value[1] + value[2] + value[3]):
+    for val in range(1, len(value)):
+        print(value[val])
+        for candidate in range(0, value[val]):
+            if val == 1 :
+                candidate = rnd.choice(letters)
+            elif val == 2:
+                candidate = rnd.choice(symbols)
+            elif val == 3:
+                candidate = rnd.choice(numbers)
+            password += candidate
+else:
+    print("Invalid. ")
+    exit(1)
+print(f"Your passowrd is: {password}")
