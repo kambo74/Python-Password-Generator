@@ -17,17 +17,32 @@ for question in questions:
 i = 1
 
 if value[0] == (value[1] + value[2] + value[3]):
-    for val in range(1, len(value)):
-        print(value[val])
-        for candidate in range(0, value[val]):
-            if val == 1 :
-                candidate = rnd.choice(letters)
-            elif val == 2:
-                candidate = rnd.choice(symbols)
-            elif val == 3:
-                candidate = rnd.choice(numbers)
-            password += candidate
+    questions.remove("length")  # removes the "length"
+    candidate = ""
+    for val in range(0, ( value[1] + value[2] + value[3])):
+        # removing expended data from list, so they won't be choosed randomly
+        if value[1] == 0:
+            questions.remove("letters")
+            value[1] = 666
+        if value[2] == 0:
+            questions.remove("numbers")
+            value[2] = 666
+        if value[3] == 0:
+            questions.remove("symbols")
+            value[3] = 666
+        select =rnd.choice(questions)
+        if select == "letters":
+            candidate = rnd.choice(letters)
+            value[1] -= 1
+        elif select == "numbers":
+            candidate = rnd.choice(numbers)
+            value[2] -= 1
+        elif select == "symbols":
+            candidate = rnd.choice(symbols)
+            value[3] -= 1
+
+        password += candidate
 else:
     print("Invalid. ")
     exit(1)
-print(f"Your passowrd is: {password}")
+print(f"Your password is: {password}")
